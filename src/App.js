@@ -21,22 +21,6 @@ export default function App() {
   };
   // end modal
 
-  const handleSlashKey = (e) => {
-    if (e.key === '/') {
-      e.preventDefault(); // Prevent the '/' character from appearing in the textarea
-      const textarea = textareaRef.current;
-
-      if (textarea && document.activeElement === textarea) {
-        textarea.value = grammarPrompt;
-        const startIndex = grammarPrompt.indexOf(target);
-        const endIndex = startIndex + target.length;
-        // Set the selection to "{{your content here}}"
-        textarea.setSelectionRange(startIndex, endIndex);
-        textarea.focus();
-      }
-    }
-  };
-
   const updateSelectionArea = (promptValue) => {
     const textarea = textareaRef.current;
 
@@ -63,7 +47,7 @@ export default function App() {
     textarea.value = inputValue;
   }, [inputValue]);
 
-  const handleSlashKey1 = (e) => {
+  const handleSlashKey = (e) => {
     if (e.key === '/') {
       e.preventDefault();
       openModal();
@@ -87,7 +71,7 @@ export default function App() {
           cols={80}
           placeholder="Press / to insert prompt template"
           ref={textareaRef}
-          onKeyDown={handleSlashKey1}
+          onKeyDown={handleSlashKey}
         />
       </label>
       <br />
