@@ -1,3 +1,4 @@
+// modalList.js
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 
@@ -48,7 +49,6 @@ function MyModal({ isOpen, updateSearchValue, onRequestClose }) {
     <Modal
       isOpen={isOpen}
       onRequestClose={handleModalClose}
-      updateSearchValue={updateSearchValue}
       contentLabel="List of Data"
     >
       <h2>List of Data</h2>
@@ -65,7 +65,7 @@ function MyModal({ isOpen, updateSearchValue, onRequestClose }) {
       ) : (
         <ul>
           {filteredData.map((item, index) => (
-            <li key={index}>{item.key}</li>
+            <li key={item.key}>{item.key}</li>
           ))}
         </ul>
       )}

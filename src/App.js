@@ -75,7 +75,6 @@ export default function App() {
         />
       </label>
       <br />
-      {/* <button onClick={openModal}>Open Modal</button> */}
       <MyModal
         isOpen={modalIsOpen}
         updateSearchValue={updateSearchValue}
