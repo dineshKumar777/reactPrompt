@@ -37,6 +37,7 @@ function MyModal({ isOpen, updateSearchValue, onRequestClose }) {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && filteredData.length > 0) {
+      e.preventDefault();
       console.log('searched value', filteredData[0]);
       updateSearchValue(filteredData[0].value);
       handleModalClose();

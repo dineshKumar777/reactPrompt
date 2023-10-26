@@ -37,10 +37,26 @@ export default function App() {
     }
   };
 
+  const updateSelectionArea = (promptValue) => {
+    const textarea = textareaRef.current;
+
+    if (textarea) {
+      console.log('inside selection area');
+      textarea.value = promptValue;
+      const startIndex = promptValue.indexOf(target);
+      const endIndex = startIndex + target.length;
+      // Set the selection to "{{your content here}}"
+      textarea.setSelectionRange(startIndex, endIndex);
+      textarea.focus();
+    }
+  };
+
   const updateSearchValue = (value) => {
     console.log('input: ', value);
     setInputValue(value);
+    updateSelectionArea(value);
   };
+
   useEffect(() => {
     console.log('updating input value', inputValue);
     const textarea = textareaRef.current;
