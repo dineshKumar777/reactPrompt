@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MyModal from "./components/modalList";
-import "./styles.css";
+import "./App.css";
 
 export default function App() {
   const textareaRef = useRef(null);
@@ -10,6 +10,7 @@ export default function App() {
 
   // modal
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -36,6 +37,24 @@ export default function App() {
     }
   };
 
+  const updateSearchValue = (value) => {
+    console.log('input: ', value);
+    setInputValue(value);
+  }
+  useEffect(() => {
+    console.log("updating input value", inputValue);
+    const textarea = textareaRef.current;
+    textarea.value = inputValue;
+  }, [inputValue])
+
+  const handleSlashKey1 = (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openModal();
+      <MyModal isOpen={modalIsOpen} updateSearchValue={updateSearchValue} onRequestClose={closeModal} />;
+    }
+  };
+
   return (
     <div className="App">
       <label>
@@ -48,12 +67,12 @@ export default function App() {
           cols={80}
           placeholder="Press / to insert prompt template"
           ref={textareaRef}
-          onKeyDown={handleSlashKey}
+          onKeyDown={handleSlashKey1}
         />
       </label>
       <br />
-      <button onClick={openModal}>Open Modal</button>
-      <MyModal isOpen={modalIsOpen} onRequestClose={closeModal} />
+      {/* <button onClick={openModal}>Open Modal</button> */}
+      <MyModal isOpen={modalIsOpen} updateSearchValue={updateSearchValue} onRequestClose={closeModal} />
     </div>
   );
 }

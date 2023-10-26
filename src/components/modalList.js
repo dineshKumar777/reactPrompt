@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root"); // Set the root element as the accessible element for screen readers
 
 const data = ["Grammar", "storyteller", "coder", "interviewer", "educator"];
 
-function MyModal({ isOpen, onRequestClose }) {
+function MyModal({ isOpen, updateSearchValue, onRequestClose }) {
   const [search, setSearch] = useState("");
 
   const handleModalClose = () => {
-    setSearch(""); // Reset the search input when the modal is closed
-    onRequestClose(); // Call the parent component's onRequestClose function
+    setSearch("");
+    onRequestClose();
   };
 
   const filteredData = data.filter((item) =>
@@ -19,8 +19,9 @@ function MyModal({ isOpen, onRequestClose }) {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && filteredData.length > 0) {
-      // Show the first result in an alert box
-      alert(`Result: ${filteredData[0]}`);
+      console.log("searched value", filteredData[0]);
+      updateSearchValue(filteredData[0])
+      handleModalClose();
     }
   };
 
@@ -28,6 +29,7 @@ function MyModal({ isOpen, onRequestClose }) {
     <Modal
       isOpen={isOpen}
       onRequestClose={handleModalClose}
+      updateSearchValue={updateSearchValue}
       contentLabel="List of Data"
     >
       <h2>List of Data</h2>
@@ -36,7 +38,7 @@ function MyModal({ isOpen, onRequestClose }) {
         placeholder="Search..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyPress}
         autoFocus
       />
       {filteredData.length === 0 ? (
