@@ -1,26 +1,44 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
+import React, { useState } from 'react';
+import Modal from 'react-modal';
 
-Modal.setAppElement("#root"); // Set the root element as the accessible element for screen readers
+// Set the root element as the accessible element for screen readers
+Modal.setAppElement('#root');
 
-const data = ["Grammar", "storyteller", "coder", "interviewer", "educator"];
+const prompt = [
+  {
+    key: 'Grammar',
+    value: `Fix all the grammar errors in the text below. Only fix grammar errors, do not change the text style. Then explain the grammar errors in a list format.\n\n'{{your content here}}'`,
+  },
+  {
+    key: 'Coder',
+    value: `Fix all the coder errors in the text below. Only fix coder errors, do not change the text style. Then explain the coder errors in a list format.\n\n'{{your content here}}'`,
+  },
+  {
+    key: 'Educator',
+    value: `Fix all the educator errors in the text below. Only fix educator errors, do not change the text style. Then explain the educator errors in a list format.\n\n'{{your content here}}'`,
+  },
+  {
+    key: 'Interviewer',
+    value: `Fix all the interviewer errors in the text below. Only fix interviewer errors, do not change the text style. Then explain the interviewer errors in a list format.\n\n'{{your content here}}'`,
+  },
+];
 
 function MyModal({ isOpen, updateSearchValue, onRequestClose }) {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const handleModalClose = () => {
-    setSearch("");
+    setSearch('');
     onRequestClose();
   };
 
-  const filteredData = data.filter((item) =>
-    item.toLowerCase().includes(search.toLowerCase())
+  const filteredData = prompt.filter((item) =>
+    item.key.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter" && filteredData.length > 0) {
-      console.log("searched value", filteredData[0]);
-      updateSearchValue(filteredData[0])
+    if (e.key === 'Enter' && filteredData.length > 0) {
+      console.log('searched value', filteredData[0]);
+      updateSearchValue(filteredData[0].value);
       handleModalClose();
     }
   };
@@ -46,7 +64,7 @@ function MyModal({ isOpen, updateSearchValue, onRequestClose }) {
       ) : (
         <ul>
           {filteredData.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li key={index}>{item.key}</li>
           ))}
         </ul>
       )}
