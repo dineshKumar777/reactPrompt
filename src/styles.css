@@ -3,6 +3,14 @@
   text-align: left;
 }
 
+.ReactModal__Content {
+  max-width: 800px;
+  margin: 0 auto;
+  max-height: 600px;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -15,7 +23,6 @@ td {
   padding: 8px;
   border: 1px solid #ccc;
 }
-
 
 tr:last-child td {
   border-bottom: none;
