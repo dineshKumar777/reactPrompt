@@ -60,15 +60,30 @@ function MyModal({ isOpen, updateSearchValue, onRequestClose }) {
         onKeyDown={handleKeyPress}
         autoFocus
       />
+      <br />
+      <br />
       {filteredData.length === 0 ? (
         <p>No results found.</p>
       ) : (
-        <ul>
-          {filteredData.map((item, index) => (
-            <li key={item.key}>{item.key}</li>
-          ))}
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Topic</th>
+              <th>Template</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map((item, index) => (
+              <tr key={item.key}>
+                <td>{item.key}</td>
+                <td>{item.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
+      <br />
+      <br />
       <button onClick={handleModalClose}>Close</button>
     </Modal>
   );

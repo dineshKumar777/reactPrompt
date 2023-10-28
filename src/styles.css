@@ -2,3 +2,35 @@
   font-family: sans-serif;
   text-align: left;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+td:last-child {
+  text-align: left;
+}
+
+th:first-child {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+td:first-child {
+  text-align: left;
+  font-weight: bold;
+}
